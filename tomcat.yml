@@ -10,10 +10,10 @@
   - name: download tomcat server
     get_url:
       url: http://mirror.cc.columbia.edu/pub/software/apache/tomcat/tomcat-8/v8.5.47/bin/apache-tomcat-8.5.47.tar.gz
-      dest: /home/jenkins/workspace
+      dest: /home/jenkins
   - name: extract tomcat
     unarchive:
-      src: /home/jenkins/workspace/apache-tomcat-8.5.47.tar.gz
+      src: /home/jenkins/apache-tomcat-8.5.47.tar.gz
       dest: /home/jenkins/workspace
       remote_src: yes
   - name: start tomcat
