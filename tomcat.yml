@@ -3,7 +3,7 @@
   become: yes
   tasks:
   - name: installing tomcat
-    apt:
+    yum:
       name: tomcat8
       state: present
       update_cache: yes
