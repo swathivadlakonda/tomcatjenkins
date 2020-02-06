@@ -1,15 +1,20 @@
 ---
-- hosts: all
-  become: yes
+- name: install tomcat server
+  hosts: all 
+  become: true
   tasks:
-  - name: installing tomcat
+  - name: install java
     yum:
-      name: tomcat8
-      state: present
-      update_cache: yes
-  handlers:
-  - name: restart tomcat8
-    service: 
-     name: tomcat8
-     state: restarted
-     enabled: yes
+      name: java-1.8.0-openjdk
+      state: latest
+  - name: download tomcat server
+    get_url:
+      url: http://mirror.cc.columbia.edu/pub/software/apache/tomcat/tomcat-8/v8.5.47/bin/apache-tomcat-8.5.47.tar.gz
+      dest: /home/jenkins/workspace
+  - name: extract tomcat
+    unarchive:
+      src: /home/jenkins/workspace/apache-tomcat-8.5.47.tar.gz
+      dest: /home/jenkins/workspace
+      remote_src: yes
+  - name: start tomcat
+    shell: /home/jenkins/workspace/apache-tomcat-8.5.47/bin/startup.sh
